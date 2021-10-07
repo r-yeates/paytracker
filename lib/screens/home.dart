@@ -29,7 +29,13 @@ class _HomeState extends State<Home> {
             Icons.settings,
             color: themeDark.colorScheme.secondary,
           ),
-          onPressed: () {},
+          onPressed: () {
+            showMaterialModalBottomSheet(
+              context: context,
+              builder: (context) =>
+                  Container(height: 250, child: Text('Settings')),
+            );
+          },
         ),
         actions: <Widget>[
           Container(
@@ -77,8 +83,48 @@ class _HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           index == 0
-                              ? Text('Current Pay Range Stats')
-                              : Text('All Time Stats')
+                              ? Center(
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        'Current Pay Period Stats',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Text('£1000'),
+                                          SizedBox(width: 10),
+                                          Text('100 Hours')
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Center(
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        'All Time Stats',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Text('£1000'),
+                                          SizedBox(width: 10),
+                                          Text('100 Hours')
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
                         ],
                       ),
                     ),

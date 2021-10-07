@@ -1,4 +1,4 @@
-package com.example.paytracker
+package com.robyeates.paytrackr
 
 import io.flutter.embedding.android.FlutterActivity
 
