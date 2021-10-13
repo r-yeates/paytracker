@@ -1,8 +1,10 @@
 import 'package:PayTrackr/config/theme.dart';
 import 'package:PayTrackr/widgets/pay_card.dart';
+import 'package:PayTrackr/widgets/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,6 +14,34 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      await prefs.setBool('seen', false);
+    } else {
+      await prefs.setBool('seen', true);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
+              title: Center(child: Text("PayTrackr")),
+              content: Text(
+                  "Welcome to PayTrackr, an easy way to track your hours worked, money earnt and tax."),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            );
+          });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkFirstSeen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +62,7 @@ class _HomeState extends State<Home> {
           onPressed: () {
             showMaterialModalBottomSheet(
               context: context,
-              builder: (context) =>
-                  Container(height: 250, child: Text('Settings')),
+              builder: (context) => const Settings(),
             );
           },
         ),
