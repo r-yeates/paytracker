@@ -2,7 +2,8 @@
     package="com.robyeates.paytrackr">
    <application
         android:label="PayTrackr"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon"
+        android:roundIcon="@mipmap/ic_launcher">>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
